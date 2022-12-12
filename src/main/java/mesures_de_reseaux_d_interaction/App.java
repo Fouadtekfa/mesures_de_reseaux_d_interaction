@@ -37,15 +37,18 @@ public class App
             System.out.println("3-Degré moyen :" + Toolkit.averageDegree(g));
             //verageClusteringCoefficient de la classe Toolkit qui nous retourne le coefficient de clustering
             System.out.println("4-coefficient de clustering :" + Toolkit.averageClusteringCoefficient(g));
-            // (Degré_moyen)/(Nombre_de_noeuds)
+            //(Degré_moyen)/(Nombre_de_noeuds)
             System.out.println("5-coefficient de clustering pour un réseau aléatoire de la même taille et du même degré moyen :"+ (Toolkit.averageDegree(g) / g.getNodeCount()));
+            //
+            System.out.println("Le réseau est-il connexe ?!==>"+((Toolkit.isConnected(g)? "Oui" : "Non ")));
+
         } catch( IOException e) {
             e.printStackTrace();
         }finally {
             fs.removeSink(g);
             System.out.println("===========Fin de lecteur==============");
         }
-
+///Le réseau est-il connexe ? Un réseau aléatoire de la même taille et degré moyen sera-t-il connexe ? À partir de quel degré moyen un réseau aléatoire avec cette taille devient connexe ?
 
     }
 

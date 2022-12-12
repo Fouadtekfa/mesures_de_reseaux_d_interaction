@@ -20,6 +20,23 @@ try {
         }
 ```  
 j'ai quand même essayé de visualiser le graphe qui était trop long a visualisé pour cette parti voici donc un capteur des résultats obtenu
-![plot](./Capture%20d’écran%201.png)
+![plot](./Capture1.png)
+2. Les Mesure de base du réseau:  
+2.1. Nombre de noeuds:     
+pour calculer ne nombre totale de noeuds j'ai utilisé getNodeCount() qui nous retourne le nombre de noeud du notre graphe
 
+2.2. Nombre de liens:   
+Pour calculer le nombre de liens j'ai utilisé la fonction getEdgeCount() qui retourne le nombre d'arêtes du notre graphe   
+   2.3. Degré moyen :
+Pour calculer le degré moyen j'ai utilisé la fonction averageDegree après avoir importe la classe Toolkit   
+```java
+import org.graphstream.algorithm.Toolkit;
+
+```
+2.4. coefficient de clustering:   
+j'ai utilisé verageClusteringCoefficient de la classe Toolkit qui nous retourne le coefficient de clustering de notre graphe passer en paramètre    
+2.5. Coefficient de clustering pour un reseau aleatoire :   
+pour calculer coefficient de clustering pour un réseau aléatoire de la même taille et du même degré moyen donc j'ai calculé (Degré_moyen)/(Nombre_de_noeuds)   
+2.6. Résultats obtenue:
+![Résultats obtenue](./Capture%202.png)
 

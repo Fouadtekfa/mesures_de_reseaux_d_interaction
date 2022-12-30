@@ -41,6 +41,7 @@ public class App
             System.out.println("5-coefficient de clustering pour un réseau aléatoire de la même taille et du même degré moyen :"+ (Toolkit.averageDegree(g) / g.getNodeCount()));
             //
             System.out.println("Le réseau est-il connexe ?!==>"+((Toolkit.isConnected(g)? "Oui" : "Non ")));
+            System.out.println(" La connexité d'un graphe aléatoire avec la même taille & degré moyen =>  " + (Toolkit.averageDegree(g)> Math.log(g.getNodeCount())));
 
         } catch( IOException e) {
             e.printStackTrace();

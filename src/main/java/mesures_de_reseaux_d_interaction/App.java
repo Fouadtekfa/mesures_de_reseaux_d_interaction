@@ -39,9 +39,20 @@ public class App
             System.out.println("4-coefficient de clustering :" + Toolkit.averageClusteringCoefficient(g));
             //(Degré_moyen)/(Nombre_de_noeuds)
             System.out.println("5-coefficient de clustering pour un réseau aléatoire de la même taille et du même degré moyen :"+ (Toolkit.averageDegree(g) / g.getNodeCount()));
-            //
-            System.out.println("Le réseau est-il connexe ?!==>"+((Toolkit.isConnected(g)? "Oui" : "Non ")));
-            System.out.println(" La connexité d'un graphe aléatoire avec la même taille & degré moyen =>  " + (Toolkit.averageDegree(g)> Math.log(g.getNodeCount())));
+            //Troisième question
+            System.out.println("=====Troisième question=======");
+            //la methode isConnected de la calasse Toolkitnos permet de vérifier si le réseau  est connexe ou pas
+            System.out.println(" Le réseau est-il connexe ?  ==>"+((Toolkit.isConnected(g)? "Oui" : "Non ")));
+            //pour cette parti il faut calculer log (nombre de noeuds) et le degrer moyenn et faire une comparaison
+           double Degre_moyen= Toolkit.averageDegree(g);
+           double ln_de_nb_noeuds = Math.log(g.getNodeCount());
+            System.out.println("Un réseau aléatoire de la même taille et degré moyen sera-t-il connexe ?");
+           if(Degre_moyen>ln_de_nb_noeuds){
+               System.out.println("  Oui il est connexe car:  " +("degrè moyen = ")+Degre_moyen +" > " +("log(Nombre de noeuds) =") +ln_de_nb_noeuds);
+           }else{
+               System.out.println("  Non il n'est pas connexe car:  " +("degrè moyen = ")+Degre_moyen +" < " +("log(Nombre de noeuds) =")+ln_de_nb_noeuds);
+           }
+
 
         } catch( IOException e) {
             e.printStackTrace();

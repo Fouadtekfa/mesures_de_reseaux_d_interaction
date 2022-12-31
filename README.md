@@ -38,5 +38,20 @@ j'ai utilisé verageClusteringCoefficient de la classe Toolkit qui nous retourne
 ## 2.5. Coefficient de clustering pour un reseau aleatoire :   
 pour calculer coefficient de clustering pour un réseau aléatoire de la même taille et du même degré moyen donc j'ai calculé (Degré_moyen)/(Nombre_de_noeuds)   
 ## 2.6. Résultats obtenue:
-![Résultats obtenue](./Capture%202.png)
+![Résultats obtenue](./Capture_2.png)
+# 3. Troisième question
+## 3.1. Le réseau est-il connexe ? 
+Un réseau est connexe si seulement si s'il est possible, à partir de n'importe quel noeud, de rejoindre les autres noeud et pour vérifier cela j'ai utilisé la méthode isConnected de la classe Toolkit qui qui m'a retourné vrai donc le réseau est connexe 
+```java
+System.out.println(" Le réseau est-il connexe ?  ==>"+((Toolkit.isConnected(g)? "Oui" : "Non ")));
+```
+## 3.2 Un réseau aléatoire de la même taille et degré moyen sera-t-il connexe ?
+Non il n'est pas connexe car : le degré moyen <K> = 6.62208890914917 < ln(N) =12.666909386951092
+## 3.3. À partir de quel degré moyen un réseau aléatoire avec cette taille devient connexe ?
+Il faut que le degré moyen sera supérieur à ln(N)=12.666909386951092  
+## 3.4. Résultats obtenue:
+![Le réseau est-il connexe ](./Capture_3.png)
+
+
+
 

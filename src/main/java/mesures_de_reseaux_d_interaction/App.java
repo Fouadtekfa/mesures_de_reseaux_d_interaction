@@ -7,6 +7,7 @@ import org.graphstream.stream.file.FileSource;
 import org.graphstream.stream.file.FileSourceEdge;
 
 import java.io.IOException;
+import java.util.Locale;
 
 /**
  * Hello world!
@@ -52,6 +53,12 @@ public class App
            }else{
                System.out.println("  Non il n'est pas connexe car:  " +("degrè moyen = ")+Degre_moyen +" < " +("log(Nombre de noeuds) =")+ln_de_nb_noeuds);
            }
+            int[] dd = Toolkit.degreeDistribution(g);
+            for (int k = 0; k < dd.length; k++) {
+                if (dd[k] != 0) {
+                    System.out.printf(Locale.US, "%6d%20.8f%n", k, (double)dd[k] / g.getNodeCount());
+                }
+            }
 
 
         } catch( IOException e) {

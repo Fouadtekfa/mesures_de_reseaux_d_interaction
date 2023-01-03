@@ -6,6 +6,9 @@ import org.graphstream.graph.implementations.DefaultGraph;
 import org.graphstream.stream.file.FileSource;
 import org.graphstream.stream.file.FileSourceEdge;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Locale;
 
@@ -54,10 +57,19 @@ public class App
                System.out.println("  Non il n'est pas connexe car:  " +("degrè moyen = ")+Degre_moyen +" < " +("log(Nombre de noeuds) =")+ln_de_nb_noeuds);
            }
             int[] dd = Toolkit.degreeDistribution(g);
+            try {
+                String filepath = System.getProperty("user.dir") + File.separator + "dd_dblp.dat";
+                FileWriter fw = new FileWriter(filepath);
+                BufferedWriter bw = new BufferedWriter(fw);
             for (int k = 0; k < dd.length; k++) {
                 if (dd[k] != 0) {
-                    System.out.printf(Locale.US, "%6d%20.8f%n", k, (double)dd[k] / g.getNodeCount());
+                    bw.write(String.format(Locale.US, "%6d%20.8f%n", k, (double)dd[k] / g.getNodeCount()));
                 }
+            }
+                bw.close();
+                System.out.println(" le fichier dd_dblp.dat est bien générer!!!!!!!!!!");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
 

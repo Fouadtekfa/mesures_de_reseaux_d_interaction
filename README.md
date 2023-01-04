@@ -5,7 +5,7 @@
 
 
 Dans ce TP il nous est demandé analyser un réseau de collaboration scientifique en informatique. Le réseau est extrait de DBLP et disponible sur SNAP.
-# 1. Téléchargement et lecture de données avec GraphStream:  
+# 1. Téléchargement et lecture de données avec GraphStream:
 Pour commencer j'ai tout d'abord téléchargé le fichier contenant la structure de notre réseau de DBLP qui es disponible sur [SNAP](https://snap.stanford.edu/data/com-DBLP.html),
 puis pour les lire j'ai utilisé la classe [FileSourceEdge()](https://data.graphstream-project.org/api/gs-core/current/org/graphstream/stream/file/FileSourceEdge.html) de GraphStream en regardant la [Documentation](https://graphstream-project.org/doc/Tutorials/Reading-files-using-FileSource/) voici le pseudo code utilisé
 ```java
@@ -21,37 +21,45 @@ try {
 ```  
 j'ai quand même essayé de visualiser le graphe qui était trop long a visualisé pour cette parti voici donc un capteur des résultats obtenu
 ![capteure1](./Capture1.png)
-# 2. Les Mesures de base du réseau:  
-## 2.1. Nombre de noeuds:     
+# 2. Les Mesures de base du réseau:
+## 2.1. Nombre de noeuds:
 pour calculer ne nombre totale de noeuds j'ai utilisé getNodeCount() qui nous retourne le nombre de noeud du notre graphe
 
-## 2.2. Nombre de liens:   
+## 2.2. Nombre de liens:
 Pour calculer le nombre de liens j'ai utilisé la fonction getEdgeCount() qui retourne le nombre d'arêtes du notre graphe   
-   2.3. Degré moyen :
-Pour calculer le degré moyen j'ai utilisé la fonction averageDegree après avoir importe la classe Toolkit   
+2.3. Degré moyen :
+Pour calculer le degré moyen j'ai utilisé la fonction averageDegree après avoir importe la classe Toolkit
 ```java
 import org.graphstream.algorithm.Toolkit;
 
 ```
-## 2.4. coefficient de clustering:   
-j'ai utilisé verageClusteringCoefficient de la classe Toolkit qui nous retourne le coefficient de clustering de notre graphe passer en paramètre    
-## 2.5. Coefficient de clustering pour un reseau aleatoire :   
-pour calculer coefficient de clustering pour un réseau aléatoire de la même taille et du même degré moyen donc j'ai calculé (Degré_moyen)/(Nombre_de_noeuds)   
+## 2.4. coefficient de clustering:
+j'ai utilisé verageClusteringCoefficient de la classe Toolkit qui nous retourne le coefficient de clustering de notre graphe passer en paramètre
+## 2.5. Coefficient de clustering pour un reseau aleatoire :
+pour calculer coefficient de clustering pour un réseau aléatoire de la même taille et du même degré moyen donc j'ai calculé (Degré_moyen)/(Nombre_de_noeuds)
 ## 2.6. Résultats obtenue:
 ![Résultats obtenue](./Capture_2.png)
 # 3. Troisième question
-## 3.1. Le réseau est-il connexe ? 
-Un réseau est connexe si seulement si s'il est possible, à partir de n'importe quel noeud, de rejoindre les autres noeud et pour vérifier cela j'ai utilisé la méthode isConnected de la classe Toolkit qui qui m'a retourné vrai donc le réseau est connexe 
+## 3.1. Le réseau est-il connexe ?
+Un réseau est connexe si seulement si s'il est possible, à partir de n'importe quel noeud, de rejoindre les autres noeud et pour vérifier cela j'ai utilisé la méthode isConnected de la classe Toolkit qui qui m'a retourné vrai donc le réseau est connexe
 ```java
 System.out.println(" Le réseau est-il connexe ?  ==>"+((Toolkit.isConnected(g)? "Oui" : "Non ")));
 ```
 ## 3.2 Un réseau aléatoire de la même taille et degré moyen sera-t-il connexe ?
+Comme on a vu en cours :
+
+![Régime connecté](./Capture_4.png)
+
+
 Non il n'est pas connexe car : le degré moyen <K> = 6.62208890914917 < ln(N) =12.666909386951092
 ## 3.3. À partir de quel degré moyen un réseau aléatoire avec cette taille devient connexe ?
-Il faut que le degré moyen sera supérieur à ln(N)=12.666909386951092  
+Il faudra que le degré moyen sera supérieur à ln(N)=12.666909386951092
 ## 3.4. Résultats obtenue:
 ![Le réseau est-il connexe ](./Capture_3.png)
 
+# Quatrième question
 
+## 4.1. Calcule de la distribution des degrés
+La distribution de degrés $`p_k = \frac{N_k}{N}`$ est la probabilité qu'un nœud choisi au hasard ait degré $`k`$. On peut utiliser [`Toolkit.degreeDistribution()`]
 
-
+Calculez la distribution des degrés et tracez-la avec gnuplot (ou avec votre outil préféré) d'abord en échelle linéaire, ensuite en échelle log-log. Est-ce qu'on observe une ligne droite en log-log ? Que cela nous indique ? Tracez la distribution de Poisson avec la même moyenne pour comparaison. Utilisez la commande fit de gnuplot pour trouver les coefficients de la loi de puissance et tracez-la.

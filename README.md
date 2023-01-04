@@ -62,4 +62,21 @@ Il faudra que le degré moyen sera supérieur à ln(N)=12.666909386951092
 ## 4.1. Calcule de la distribution des degrés
 La distribution de degrés $`p_k = \frac{N_k}{N}`$ est la probabilité qu'un nœud choisi au hasard ait degré $`k`$. On peut utiliser [`Toolkit.degreeDistribution()`]
 
-Calculez la distribution des degrés et tracez-la avec gnuplot (ou avec votre outil préféré) d'abord en échelle linéaire, ensuite en échelle log-log. Est-ce qu'on observe une ligne droite en log-log ? Que cela nous indique ? Tracez la distribution de Poisson avec la même moyenne pour comparaison. Utilisez la commande fit de gnuplot pour trouver les coefficients de la loi de puissance et tracez-la.
+Afin de pouvoir tracer avec gnuplot j'ai généré un [fichier](./src/resources/dd_dblp.dat) Contenant la distribution des degrés en utilisant le script suivant :
+```java
+   int[] dd = Toolkit.degreeDistribution(g);
+        for (int k = 0; k < dd.length; k++) {
+        if (dd[k] != 0) {
+        bw.write(String.format(Locale.US, "%6d%20.8f%n", k, (double)dd[k] / g.getNodeCount()));
+        }
+```
+
+## 4.2. En échelle linéaire :
+On utilise ce [script](/src/resources/lineaire.gnu) pour tracer la distribution en échelle linéaire.
+
+![En échelle linéaire ](./src/resources/echelle_lineaire.png)
+
+## 4.2. En échelle Log Log:
+On utilise ce [script](/src/resources/ehelle_log_log.gnu) pour tracer la distribution en échelle Log Log.
+
+![En échelle linéaire ](./src/resources/echelle_log_log.png)

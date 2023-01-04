@@ -61,7 +61,7 @@ public class App
                 String filepath = System.getProperty("user.dir") + File.separator + "./src/resources/dd_dblp.dat";
                 FileWriter fw = new FileWriter(filepath);
                 BufferedWriter bw = new BufferedWriter(fw);
-             //   bw.write(String.format(Locale.US,"#");
+
             for (int k = 0; k < dd.length; k++) {
                 if (dd[k] != 0) {
                     bw.write(String.format(Locale.US, "%6d%20.8f%n", k, (double)dd[k] / g.getNodeCount()));

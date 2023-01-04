@@ -79,4 +79,18 @@ On utilise ce [script](/src/resources/lineaire.gnu) pour tracer la distribution 
 ## 4.2. En échelle Log Log:
 On utilise ce [script](/src/resources/ehelle_log_log.gnu) pour tracer la distribution en échelle Log Log.
 
-![En échelle linéaire ](./src/resources/echelle_log_log.png)
+![En échelle Log Log ](./src/resources/echelle_log_log.png)
+
+En traçant la distribution de degrés en échelle log-log on observe une ligne droite pendant plusieurs ordres de grandeur. Cela nous indique une loi de puissance :
+
+    ```math
+    p_k = C k^{-\gamma}
+    ```
+## 4.3. La distribution de Poisson avec la même moyenne pour comparaison :
+On utilise ce [script](/src/resources/La_distribution_de_Poisson_avec_la_meme%20moyenne.gnu) pour tracer La distribution de Poisson avec la même moyenne :
+
+![La distribution de Poisson avec la même moyenne  ](./src/resources/La_distribution_de_Poisson_avec_la_meme_moyenne.png)
+
+## 4.4. Tracer la distribution de Poisson avec la même moyenne
+On utilise ce [script](/src/resources/plot_dd.gnu) pour tracer la distribution et estimer l'exposant de la loi de puissance.
+    ![distribution des degrés](src/resources/dd_dblp.png)

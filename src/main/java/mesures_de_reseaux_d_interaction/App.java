@@ -12,15 +12,38 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
  * Hello world!
  *
  */
-public class App 
+public class App
+
 {
+/*
+    public static double sommeDistance(Graph graph){
+        double distance=0;
+        ArrayList listNoeud = new ArrayList();
+
+        for (int i = 0; i < 1000; i++) {
+            Node node;
+            do {
+                node = Toolkit.randomNode(graph);
+            }while (listNoeud.contains(node));
+            listNoeud.add(node);
+            BreadthFirstIterator bf = new BreadthFirstIterator(node);
+            while (bf.hasNext()) {
+                distance += (bf.getDepthOf(bf.next()));
+            }
+        }
+        return distance;
+    }
+*/
     public static void main( String[] args )
+
     {
         System.setProperty("org.graphstream.ui", "swing");
         Graph g = new DefaultGraph("g");
@@ -75,21 +98,21 @@ public class App
             catch (IOException e) {
                 e.printStackTrace();
             }
-            double distProba[] = new double[50];
-            int nbNoeud = g.getNodeCount() * 1000;
+            //double distance =App.sommeDistance(g)/(g.getNodeCount()*1000);
+            //System.out.println ("distance " + distance);
+            double Totale_distance=0;
+            List <Node> randomnode= Toolkit.randomNodeSet(g,1000);
+
             for (int i = 0; i < 1000; i++) {
-                Node noeud = Toolkit.randomNode(g);
-                BreadthFirstIterator bf = new BreadthFirstIterator(noeud);
+                Node node = randomnode.get(i);
+                BreadthFirstIterator bf = new BreadthFirstIterator(node);
                 while (bf.hasNext()) {
-                    distProba[bf.getDepthOf(bf.next())]++;
+                    Totale_distance += (bf.getDepthOf(bf.next()));
+
                 }
             }
-            int j = 0;
-            while (distProba[j] != 0) {
-                System.out.println(j + " " + distProba[j]/nbNoeud);
-                j++;
-            }
-           System.out.println("distProba :"+distProba);
+             double DistanceMoyenne= Totale_distance/(g.getNodeCount() * 1000);
+            System.out.println("Distance Moyenne = " +DistanceMoyenne);
 
 
         } catch( IOException e) {

@@ -87,7 +87,7 @@ En traçant la distribution de degrés en échelle log-log on observe une ligne 
 p_k = C k^{-\gamma}
 ```
 ## 4.3. La distribution de Poisson avec la même moyenne pour comparaison :
-On utilise ce [script](/src/resources/La_distribution_de_Poisson_avec_la_meme%20moyenne.gnu) pour tracer La distribution de Poisson avec la même moyenne :
+On utilise ce [script](/src/resources/La_distribution_de_Poisson_avec_la_meme_moyenne.gnu) pour tracer La distribution de Poisson avec la même moyenne :
 
 ![La distribution de Poisson avec la même moyenne  ](./src/resources/La_distribution_de_Poisson_avec_la_meme_moyenne.png)
 

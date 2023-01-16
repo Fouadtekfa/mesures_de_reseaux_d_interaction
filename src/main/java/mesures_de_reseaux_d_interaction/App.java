@@ -1,7 +1,9 @@
 package mesures_de_reseaux_d_interaction;
 
 import org.graphstream.algorithm.Toolkit;
+import org.graphstream.graph.BreadthFirstIterator;
 import org.graphstream.graph.Graph;
+import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.DefaultGraph;
 import org.graphstream.stream.file.FileSource;
 import org.graphstream.stream.file.FileSourceEdge;
@@ -69,9 +71,25 @@ public class App
             }
                 bw.close();
                 System.out.println(" le fichier dd_dblp.dat  Dans est bien générer dans le dossiers resources!!!!!!!!!!");
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 e.printStackTrace();
             }
+            double distProba[] = new double[50];
+            int nbNoeud = g.getNodeCount() * 1000;
+            for (int i = 0; i < 1000; i++) {
+                Node noeud = Toolkit.randomNode(g);
+                BreadthFirstIterator bf = new BreadthFirstIterator(noeud);
+                while (bf.hasNext()) {
+                    distProba[bf.getDepthOf(bf.next())]++;
+                }
+            }
+            int j = 0;
+            while (distProba[j] != 0) {
+                System.out.println(j + " " + distProba[j]/nbNoeud);
+                j++;
+            }
+           System.out.println("distProba :"+distProba);
 
 
         } catch( IOException e) {

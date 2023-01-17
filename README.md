@@ -20,7 +20,7 @@ try {
         }
 ```  
 j'ai quand même essayé de visualiser le graphe qui était trop long a visualisé pour cette parti voici donc un capteur des résultats obtenu
-![capteure1](./Capture1.png)
+![capteure1](./capture_mesures/Capture1.png)
 # 2. Les Mesures de base du réseau:
 ## 2.1. Nombre de noeuds:
 pour calculer ne nombre totale de noeuds j'ai utilisé getNodeCount() qui nous retourne le nombre de noeud du notre graphe
@@ -38,7 +38,7 @@ j'ai utilisé verageClusteringCoefficient de la classe Toolkit qui nous retourne
 ## 2.5. Coefficient de clustering pour un reseau aleatoire :
 pour calculer coefficient de clustering pour un réseau aléatoire de la même taille et du même degré moyen donc j'ai calculé (Degré_moyen)/(Nombre_de_noeuds)
 ## 2.6. Résultats obtenue:
-![Résultats obtenue](./Capture_2.png)
+![Résultats obtenue](./capture_mesures/Capture_2.png)
 # 3. Troisième question
 ## 3.1. Le réseau est-il connexe ?
 Un réseau est connexe si seulement si s'il est possible, à partir de n'importe quel noeud, de rejoindre les autres noeud et pour vérifier cela j'ai utilisé la méthode isConnected de la classe Toolkit qui qui m'a retourné vrai donc le réseau est connexe
@@ -48,14 +48,14 @@ System.out.println(" Le réseau est-il connexe ?  ==>"+((Toolkit.isConnected(g)?
 ## 3.2 Un réseau aléatoire de la même taille et degré moyen sera-t-il connexe ?
 Comme on a vu en cours :
 
-![Régime connecté](./Capture_4.png)
+![Régime connecté](./capture_mesures/Capture_4.png)
 
 
 Non il n'est pas connexe car : le degré moyen <K> = 6.62208890914917 < ln(N) =12.666909386951092
 ## 3.3. À partir de quel degré moyen un réseau aléatoire avec cette taille devient connexe ?
 Il faudra que le degré moyen sera supérieur à ln(N)=12.666909386951092
 ## 3.4. Résultats obtenue:
-![Le réseau est-il connexe ](./Capture_3.png)
+![Le réseau est-il connexe ](./capture_mesures/Capture_3.png)
 
 # Quatrième question
 
@@ -94,3 +94,15 @@ On utilise ce [script](/src/resources/La_distribution_de_Poisson_avec_la_meme_mo
 ## 4.4. Tracer la distribution de Poisson avec la même moyenne
 On utilise ce [script](/src/resources/plot_dd.gnu) pour tracer la distribution et estimer l'exposant de la loi de puissance.
     ![distribution des degrés](src/resources/dd_dblp.png)
+
+# Cinquième question :
+Maintenant on va calculer la distance moyenne dans le réseau. Le calcul des plus courts chemins entre 
+toutes les paires de nœuds prendra plusieurs heures pour cette taille de réseau. C'est pourquoi on va 
+estimer la distance moyenne par échantillonnage en faisant un parcours en largeur à partir de 1000 sommets 
+choisis au hasard. L'hypothèse des six degrés de séparation se confirme-t-elle ? Est-ce qu'il s'agit d'un 
+réseau petit monde ? Quelle sera la distance moyenne dans un réseau aléatoire avec les mêmes caractéristiques ? 
+Tracez également la distribution des distances. Formulez une hypothèse sur la loi de cette distribution.
+
+
+Distance Moyenne = 6.757081392708464
+

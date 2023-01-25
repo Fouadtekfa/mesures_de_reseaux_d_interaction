@@ -106,3 +106,219 @@ correlation matrix of the fit parameters:
                 lc     gamma  
 lc              1.000 
 gamma           0.976  1.000 
+
+
+*******************************************************************************
+Wed Jan 25 04:16:59 2023
+
+
+FIT:    data read from 'dd_dblprandom.dat' using (log($1)):(log($2))
+        format = x:z
+        #datapoints = 20
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = lc - gamma * x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   lc            gamma        
+   0 4.0439159901e+02   0.00e+00  1.75e+00    1.000000e+00   1.000000e+00
+   3 1.1763625809e+02  -8.52e-02  1.75e-03   -3.464522e-01   2.104336e+00
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 117.636
+rel. change during last iteration : -8.51769e-07
+
+degrees of freedom    (FIT_NDF)                        : 18
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 2.55643
+variance of residuals (reduced chisquare) = WSSR/ndf   : 6.53535
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+lc              = -0.346452        +/- 1.631        (470.8%)
+gamma           = 2.10434          +/- 0.7216       (34.29%)
+
+correlation matrix of the fit parameters:
+                lc     gamma  
+lc              1.000 
+gamma           0.937  1.000 
+
+
+*******************************************************************************
+Wed Jan 25 04:19:23 2023
+
+
+FIT:    data read from 'dd_dblprandom.dat' using (log($1)):(log($2))
+        format = x:z
+        #datapoints = 20
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = lc - gamma * x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   lc            gamma        
+   0 4.0439159901e+02   0.00e+00  1.75e+00    1.000000e+00   1.000000e+00
+   3 1.1763625809e+02  -8.52e-02  1.75e-03   -3.464522e-01   2.104336e+00
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 117.636
+rel. change during last iteration : -8.51769e-07
+
+degrees of freedom    (FIT_NDF)                        : 18
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 2.55643
+variance of residuals (reduced chisquare) = WSSR/ndf   : 6.53535
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+lc              = -0.346452        +/- 1.631        (470.8%)
+gamma           = 2.10434          +/- 0.7216       (34.29%)
+
+correlation matrix of the fit parameters:
+                lc     gamma  
+lc              1.000 
+gamma           0.937  1.000 
+
+
+*******************************************************************************
+Wed Jan 25 04:30:05 2023
+
+
+FIT:    data read from 'dd_dblprandom.dat' using (log($1)):(log($2))
+        format = x:z
+        #datapoints = 20
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = lc - gamma * x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   lc            gamma        
+   0 4.0439159901e+02   0.00e+00  1.75e+00    1.000000e+00   1.000000e+00
+   3 1.1763625809e+02  -8.52e-02  1.75e-03   -3.464522e-01   2.104336e+00
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 117.636
+rel. change during last iteration : -8.51769e-07
+
+degrees of freedom    (FIT_NDF)                        : 18
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 2.55643
+variance of residuals (reduced chisquare) = WSSR/ndf   : 6.53535
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+lc              = -0.346452        +/- 1.631        (470.8%)
+gamma           = 2.10434          +/- 0.7216       (34.29%)
+
+correlation matrix of the fit parameters:
+                lc     gamma  
+lc              1.000 
+gamma           0.937  1.000 
+
+
+*******************************************************************************
+Wed Jan 25 04:52:53 2023
+
+
+FIT:    data read from 'dd_dblprandom.dat' using (log($1)):(log($2))
+        format = x:z
+        #datapoints = 20
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = lc - gamma * x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   lc            gamma        
+   0 4.0439159901e+02   0.00e+00  1.75e+00    1.000000e+00   1.000000e+00
+   3 1.1763625809e+02  -8.52e-02  1.75e-03   -3.464522e-01   2.104336e+00
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 117.636
+rel. change during last iteration : -8.51769e-07
+
+degrees of freedom    (FIT_NDF)                        : 18
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 2.55643
+variance of residuals (reduced chisquare) = WSSR/ndf   : 6.53535
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+lc              = -0.346452        +/- 1.631        (470.8%)
+gamma           = 2.10434          +/- 0.7216       (34.29%)
+
+correlation matrix of the fit parameters:
+                lc     gamma  
+lc              1.000 
+gamma           0.937  1.000 
+
+
+*******************************************************************************
+Wed Jan 25 04:54:08 2023
+
+
+FIT:    data read from 'dd_dblpBarabasiAlbert.dat' using (log($1)):(log($2))
+        format = x:z
+        #datapoints = 315
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = lc - gamma * x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   lc            gamma        
+   0 1.4842684201e+04   0.00e+00  3.63e+00    1.000000e+00   1.000000e+00
+   3 2.3232536671e+02  -7.81e-02  3.63e-03   -9.733858e-02   2.139473e+00
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 232.325
+rel. change during last iteration : -7.80642e-07
+
+degrees of freedom    (FIT_NDF)                        : 313
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.861541
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.742254
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+lc              = -0.0973386       +/- 0.2177       (223.6%)
+gamma           = 2.13947          +/- 0.04324      (2.021%)
+
+correlation matrix of the fit parameters:
+                lc     gamma  
+lc              1.000 
+gamma           0.975  1.000 
+
+
+*******************************************************************************
+Wed Jan 25 04:58:08 2023
+
+
+FIT:    data read from 'dd_dblprandom.dat' using (log($1)):(log($2))
+        format = x:z
+        #datapoints = 20
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = lc - gamma * x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   lc            gamma        
+   0 4.0439159901e+02   0.00e+00  1.75e+00    1.000000e+00   1.000000e+00
+   3 1.1763625809e+02  -8.52e-02  1.75e-03   -3.464522e-01   2.104336e+00
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 117.636
+rel. change during last iteration : -8.51769e-07
+
+degrees of freedom    (FIT_NDF)                        : 18
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 2.55643
+variance of residuals (reduced chisquare) = WSSR/ndf   : 6.53535
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+lc              = -0.346452        +/- 1.631        (470.8%)
+gamma           = 2.10434          +/- 0.7216       (34.29%)
+
+correlation matrix of the fit parameters:
+                lc     gamma  
+lc              1.000 
+gamma           0.937  1.000 

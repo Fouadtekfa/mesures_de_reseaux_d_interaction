@@ -1,5 +1,6 @@
 package mesures_de_reseaux_d_interaction;
 
+
 import org.graphstream.algorithm.Toolkit;
 import org.graphstream.algorithm.generator.BarabasiAlbertGenerator;
 import org.graphstream.algorithm.generator.Generator;
@@ -12,34 +13,79 @@ import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.stream.file.FileSource;
 import org.graphstream.stream.file.FileSourceEdge;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * Hello world!
- *
- */
+
 public class Mesures
 
 {
+    /**
+     * methode pour but de sauvegarder la Distribution des Distances dans un fichier
+     * a fin de Tracer la distribution des distances avec gnuplot
+     * @param NodeCount  Nombre de noeuds
+     * @param randomnode liste random de 1000 Noeuds
+     */
+    public static void sauvegardeDistributionDistance(int NodeCount, List<Node> randomnode, String name ){
+        double distProba[] = new double[50];
+        int max = NodeCount * 1000;
+        for (int i = 0; i < 1000; i++) {
+            Node noeud = randomnode.get(i);
+            BreadthFirstIterator bf = new BreadthFirstIterator(noeud);
+            while (bf.hasNext()) {
+                distProba[bf.getDepthOf(bf.next())]++;
+            }
+        }
+        try {
+
+            String filepath = System.getProperty("user.dir") + File.separator + "./src/resources/"+name+".data";
+            FileWriter fw = new FileWriter(filepath);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            int j = 0;
+            while (distProba[j] != 0) {
+                bw.write(String.format(Locale.US, "%6d%20.8f%n", j, (double)distProba[j]/max));
+
+                j++;
+            }
+            bw.close();
+            System.out.println("Le fichier de distribution des distances a été généré avec succès dans le répertoire des ressources ");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *
+     * @param nbNoeuds
+     * @param degreeMoyen
+     * @return graphe
+     */
     public static Graph generateurRandom(double nbNoeuds , double degreeMoyen){
         System.out.println("La génération du graphe aléatoire ");
         Graph graph = new SingleGraph("RandomGraph");
         Generator gen = new RandomGenerator(degreeMoyen);
         gen.addSink(graph);
         gen.begin();
-        for (int i = 0; i < nbNoeuds; i++)
+       /* for (int i = 0; i < nbNoeuds; i++)
             gen.nextEvents();
+
+        */
+        while(graph.getNodeCount()<nbNoeuds) {
+            gen.nextEvents();
+        }
         gen.end();
         System.out.println("Fin génération du graphe aléatoire");
         return graph;
     }
 
-
+    /**
+     *
+     * @param nbNoeuds
+     * @param degreeMoyen
+     * @return graphe
+     */
     public static Graph generateurBarabasiAlbert(int nbNoeuds ,int degreeMoyen) {
         System.out.println("La génération du graphe Barabàsi-Albert ");
         Graph graph = new SingleGraph("Barabàsi-Albert");
@@ -49,12 +95,35 @@ public class Mesures
         gen.addSink(graph);
         gen.begin();
 
-        for (int i = 0; i < nbNoeuds; i++) {
+        /*for (int i = 0; i < nbNoeuds; i++) {
+            gen.nextEvents();
+        }*/
+        while(graph.getNodeCount()<nbNoeuds) {
             gen.nextEvents();
         }
+        gen.end();
         System.out.println("Fin génération du graphe Barabàsi-Albert");
       return graph;
     }
+
+    public static void distMoy( Graph graphe,  List<Node> randomnode, String name){
+        double Totale_distance=0;
+        for (int i = 0; i < 1000; i++) {
+            Node node = randomnode.get(i);
+            BreadthFirstIterator bf = new BreadthFirstIterator(node);
+            while (bf.hasNext()) {
+                Totale_distance += (bf.getDepthOf(bf.next()));
+
+            }
+        }
+        double max = graphe.getNodeCount() * 1000 ;
+        double DistanceMoyenneB= Totale_distance/max;
+        System.out.println("la somme = "+ Totale_distance);
+        System.out.println("max = "+ max);
+        System.out.println("Distance Moyenne = " +DistanceMoyenneB);
+        sauvegardeDistributionDistance(graphe.getNodeCount() ,randomnode,name);
+    }
+
 
     public static void main( String[] args )
 
@@ -115,9 +184,7 @@ public class Mesures
                 e.printStackTrace();
             }
 
-
-            System.out.println(" =====Question5 calculer de distance moyenne=======");
-
+            System.out.println(" ===== calculer de distance moyenne  =======");
             double Totale_distance=0;
             List<Node> randomnode= Toolkit.randomNodeSet(g,1000);
 
@@ -129,9 +196,14 @@ public class Mesures
 
                 }
             }
+            double max = g.getNodeCount() * 1000 ;
+            double DistanceMoyenne= Totale_distance/max;
+            System.out.println("la somme = "+ Totale_distance);
+            System.out.println("max = "+ max);
+            System.out.println("Distance Moyenne = " +DistanceMoyenne);
+            sauvegardeDistributionDistance(g.getNodeCount(),randomnode,"DistributionDistance");
 
-             double DistanceMoyenne= Totale_distance/(g.getNodeCount() * 1000);
-              System.out.println("Distance Moyenne = " +DistanceMoyenne);
+            System.out.println("ln(N) / ln <k> =" + ln_de_nb_noeuds/Math.log(Degre_moyen) );
 
 
         } catch( IOException e) {
@@ -161,6 +233,31 @@ public class Mesures
         }else{
             System.out.println("  Non il n'est pas connexe car:  " +("degrè moyen = ")+ Toolkit.averageDegree(random) +" < " +("log(Nombre de noeuds) =")+Math.log(random.getNodeCount()));
         }
+        System.out.println(" =====calculer de distance moyenne réseau aléatoire =======");
+        int[] ddR = Toolkit.degreeDistribution(random);
+        try {
+            String filepath = System.getProperty("user.dir") + File.separator + "./src/resources/dd_dblprandom.dat";
+            FileWriter fw = new FileWriter(filepath);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            for (int k = 0; k < ddR.length; k++) {
+                if (ddR[k] != 0) {
+                    bw.write(String.format(Locale.US, "%6d%20.8f%n", k, (double)ddR[k] / random.getNodeCount()));
+                }
+            }
+            bw.close();
+            System.out.println("Le fichier dd_dblprandom.dat a été généré avec succès dans le répertoire des ressources ");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        List<Node> randomnodeR= Toolkit.randomNodeSet(random,1000);
+        distMoy(random,randomnodeR,"distribution_des_distance_randome");
+
+
+
         System.out.println("=======Quelques mesures de base graphe Barabàsi-Albert :======");
         System.out.println("1- Nombre de noeuds :" +BarabasiAlbert.getNodeCount() );
         //getEdgeCount qui nous retourne le nombre d'arêtes que de notre graphe g dans notre cas
@@ -179,6 +276,30 @@ public class Mesures
         }else{
             System.out.println("  Non il n'est pas connexe car:  " +("degrè moyen = ")+ Toolkit.averageDegree(BarabasiAlbert) +" < " +("log(Nombre de noeuds) =")+Math.log(BarabasiAlbert.getNodeCount()));
         }
+
+        int[] ddB = Toolkit.degreeDistribution(BarabasiAlbert);
+        try {
+            String filepath = System.getProperty("user.dir") + File.separator + "./src/resources/dd_dblpBarabasiAlbert.dat";
+            FileWriter fw = new FileWriter(filepath);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            for (int k = 0; k < ddB.length; k++) {
+                if (ddB[k] != 0) {
+                    bw.write(String.format(Locale.US, "%6d%20.8f%n", k, (double)ddB[k] / BarabasiAlbert.getNodeCount()));
+                }
+            }
+            bw.close();
+            System.out.println("Le fichier dd_dblpBarabasiAlbert.dat a été généré avec succès dans le répertoire des ressources ");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(" =====calculer de distance moyenne Barabàsi-Albert =======");
+
+        List<Node> randomnodeB= Toolkit.randomNodeSet(BarabasiAlbert,1000);
+        distMoy(BarabasiAlbert,randomnodeB,"distribution_des_distancesBarabasiAlbert");
+
     }
 
 

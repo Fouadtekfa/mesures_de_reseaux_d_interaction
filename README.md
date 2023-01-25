@@ -1,4 +1,4 @@
-# TP 1 Mesures de réseaux d'interaction
+# TP 2 Mesures de réseaux d'interaction
 - Fouad TEKFA
 - M1 IWOCS
 - 2022-2023
@@ -102,7 +102,92 @@ estimer la distance moyenne par échantillonnage en faisant un parcours en large
 choisis au hasard. L'hypothèse des six degrés de séparation se confirme-t-elle ? Est-ce qu'il s'agit d'un 
 réseau petit monde ? Quelle sera la distance moyenne dans un réseau aléatoire avec les mêmes caractéristiques ? 
 Tracez également la distribution des distances. Formulez une hypothèse sur la loi de cette distribution.
+ ## 5.1. Calcule de la distance moyenne dans ce réseau :
+Pour estimer la distance moyenne par échantillonnage, j'ai suivi les étapes suivantes :
+- J'ai utilisé la méthode randomNodeSet de la classe Toolkit pour avoir les 1000 sommets au hasard.  
+- J'ai utilisé l'algorithme de parcours en largeur BFI pour avoir la longueur du plus court chemin entre deux nœuds.
+- J'ai calculé la somme des distances d'un nœud (le nœud source) vers tous les autres nœuds de l'échantillon.
+- j'ai divisé la somme obtenue par le nombre de nœuds * 1000 pour obtenir une estimation de la distance moyenne de notre réseau.
+### Voici les résultats obtenus:
+    la somme = 2.175195856E9
+    Max = 3.1708E8
+    Distance Moyenne = 6.860085328623692
+
+## 5.2. L'hypothèse des six degrés: 
+Oui, l'hypothèse des six degrés de séparation se confirme vu que la Distance Moyenne = 6.860085328623692.
+## 5.3. Petit Monde: 
+Comme on a vu en cours la propriété petit monde est définie par : 
+
+![Petit Monde](capture_mesures/Capture_petit_monde.png)
+
+Oui, il s'agit d'un réseau petit monde, car Distance moyenne ≈ ln(N)/ln(k)
+
+## 5.4.La distance moyenne dans un réseau aléatoire avec les mêmes caractéristiques:
+D'après le cours Un réseau aléatoire avec les mêmes caractéristiques aura une distance moyenne similaire.
+
+## 5.5. La distribution des distances
+J'ai créé la méthode sauvegardeDistributionDistance(int NodeCount, List<Node> randomnode  ) afin de calcule la distribution de la distance puis generer le fichiers DistributionDistance.data.  
+ 
+pour tracer la distribution des distances avec le [fichier](/src/resources/DistributionDistance.data) généré, j'ai utilisé ce [script](/src/resources/DistributionDistance.gnuplot) : 
+   
+![ distribution des distances ](src/resources/distributionDistance.png)
+  
+## 5.6. Hypothèse sur la loi de cette distribution :
+- D'après le graphe, on peut déduire que la loi de distribution de distance suit une loi binomiale.
+
+# Sixième question :
+Utilisez les générateurs de GraphStream pour générer un réseau aléatoire et un réseau avec la méthode d'attachement préférentiel
+(Barabasi-Albert) qui ont la même taille et le même degré moyen.
+Refaites les mesures des questions précédentes pour ces deux réseaux. 
+Les résultats expérimentaux correspondent-ils aux prédictions théoriques ? 
+Comparez avec le réseau de collaboration. Que peut-on conclure ?
+## 6.1 générer un réseau aléatoire 
+- generateurRandom(double nbNoeuds , double degreeMoyen) : cette méthode et pour but de générer un réseau aléatoire, elle prend deux paramètres nombre de Nœuds et le dégrée Moyen, en utilisant la classe RandomGenerator de graphStream.     
+## 6.2 générer un réseau avec la méthode d'attachement préférentiel (Barabasi-Albert) :
+- generateurBarabasiAlbert(int nbNoeuds ,int degreeMoyen) : cette méthode et pour but de générer un réseau Barabasi-Albert , elle prend deux paramètres nombre de Nœuds et le dégrée Moyen, en utilisant la classe Barabasi-Albert de graphStream. 
+## 6.3.Refaire les mesures des questions précédentes pour ces deux réseaux : 
+
+| type de graphe | Nombre de noeuds | Nombre de liens    | Degré moyen      | coefficient de clustering    | connexe | Distance Moyenne                                                                                       |
+|-------------|------------------|-----|------------------|-----|---------|--------------------------------------------------------------------------------------------------------|
+| DBLP            |  317080          | 1049866    |   6.62208890914917  |   2.0884599814397534E-5  | oui     |6.860085328623692 |  
+| RandomGraph | 317080           |  1049503   | 6.19799613952637 |  1.8928034176551887E-5   | Non     |          6.912789999369244                                                                                              |
+| Barabàsi-Albert | 317080           | 1109288    | 6.99689674377441 | 3.8303829341658014E-4    | Oui     |      5.062236192758925                                                                                                  |
+
+### distribution des degrés (RandomGraph ):  
+On utilise ce [script](src/resources/dd_dblp_Random.gnuplot) pour tracer la distribution et estimer l'exposant de la loi de puissance. 
+
+   ![distribution des degrés (RandomGraph )](src/resources/dd_dblp_random.png)
+
+### distribution des degrés (Barabàsi-Albert ):
+On utilise ce [script](src/resources/dd_dblp_B_A.gnuplot) pour tracer la distribution et estimer l'exposant de la loi de puissance
+
+   ![distribution des degrés (Barabàsi-Albert )](src/resources/dd_dblpBarabasiAlbert.png)
+
+###  La distribution des distances (RandomGraph ):
+![ distribution des distances RandomGraph ](src/resources/distributionDistanceRandom.png)
+###  La distribution des distances (Barabàsi-Albert ):
+![ distribution des distances Barabàsi-Albert  ](src/resources/distributionDistanceBarabasiAlbert.png) 
+
+## 6.4. Les résultats expérimentaux et théoriques: 
+   - Les résultats sont preceque similaires entre les meseures théorique et pratique.  
+
+## 6.5. Comparaison : 
 
 
-Distance Moyenne = 6.757081392708464
+
+
+
+# TP 3 Propagation
+## 1. premiere question :  
+Quel est le taux de propagation du virus ? Quel est le seuil épidémique du réseau ? Comparez avec le seuil théorique d'un réseau aléatoire du même degré moyen.
+### 1.1. Taux de propagation du virus :
+Pour prédire si la maladie persiste, on définit le taux de
+propagation :
+```math               
+ lambda = bêta/mu  
+
+```                   
+### 1.2 Seuil épidémique : 
+
+### 1.3 Comparaison avec le seuil théorique d'un réseau aléatoire du même degré moyen :
 

@@ -178,16 +178,44 @@ On utilise ce [script](src/resources/dd_dblp_B_A.gnuplot) pour tracer la distrib
 
 
 # TP 3 Propagation
+
+Nos collaborateurs scientifiques communiquent souvent par mail. Malheureusement pour eux, les pièces jointes de ces mails contiennent parfois des virus informatiques. On va étudier la propagation d'un virus avec les hypothèses suivantes :
+
+- Un individu envoie en moyenne un mail par semaine à chacun de ses collaborateurs.
+- Un individu met à jour son anti-virus en moyenne deux fois par mois. Cela nettoie son système mais ne le protège pas de nouvelles infections car le virus mute.
+L'épidémie commence avec un individu infecté (patient zéro).
 ## 1. premiere question :  
 Quel est le taux de propagation du virus ? Quel est le seuil épidémique du réseau ? Comparez avec le seuil théorique d'un réseau aléatoire du même degré moyen.
 ### 1.1. Taux de propagation du virus :
 Pour prédire si la maladie persiste, on définit le taux de
-propagation :
+propagation λ par  :
 ```math               
- lambda = bêta/mu  
+λ = β / µ
+``` 
+- β est la probabilité de transmettre dans une unité de temps dans notre cas :
+```math
+β = 1/7  avec t = 1 jour 
+```
+- μ est le taux de guérison dans notre cas:
+```math                                       
+β = 1 / 14 avec t = 1 mois                  
+```   
+Donc :
+```math                                       
+λ = β/µ = 14/7= 2                      
+```               
 
-```                   
 ### 1.2 Seuil épidémique : 
+```math
+λ_c = 〈k〉/〈k2〉≈0.045984724362225844 ≈ 0,046 
+```
 
-### 1.3 Comparaison avec le seuil théorique d'un réseau aléatoire du même degré moyen :
+
+### 1.3 le seuil théorique d'un réseau aléatoire du même degré moyen :
+```math
+ λ_c = 1/{<K>+1} ≈ 0.13119762993051035 ≈0.131 
+```
+### 1.4.Résultats obtenue: 
+![](./Capture_propagation/Capture1_propagation.png)
+
 

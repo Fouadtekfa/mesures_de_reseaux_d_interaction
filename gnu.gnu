@@ -1,5 +1,5 @@
 set terminal png
-set title "Scenario1"
+set title "Scenario2sc1.txt"
 set yrange [0 : 300000]
-set output 'Scenario1.png'
-plot"Scenario1.data"
+set output 'test6data.png'
+plot"test6.data.data"

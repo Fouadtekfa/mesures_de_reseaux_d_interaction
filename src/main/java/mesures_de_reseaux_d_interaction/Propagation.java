@@ -16,19 +16,11 @@ import java.util.function.Consumer;
 
 import static org.graphstream.algorithm.Toolkit.randomNode;
 import static org.graphstream.algorithm.Toolkit.randomNodeSet;
+import static org.graphstream.ui.graphicGraph.GraphPosLengthUtils.positionFromObject;
 
 public class Propagation {
 
-    public static int jours = 84;
-
-    private static HashSet<Node> malades = new HashSet<>(); //liste infectés
-    private static HashSet<Node> copieMalades = new HashSet<>();
-
-    private static double Beta = 1.0 / 7.0; // la probabilité de transmission
-    private static double Mu = 1.0 / 14.0; // le taux pour que les individus infectieux guérissent
-
-    private static long[] infecteJ = new long[jours + 1]; // pour stockr le nombre d'individus infectés par jour
-    public static Random random = new Random();
+    public static int jours = 90;
 
     public static Graph readgraphe(String Path) {
         System.setProperty("org.graphstream.ui", "swing");
@@ -65,71 +57,128 @@ public class Propagation {
         return k2;
     }
 
+    public static void  SimulationScenario1(Graph g , String nom_fichiers){
 
-    public static void simulationScenario1( Graph graphe ) {
+        double Beta = 1.0/7.0 ; // la probabilité de transmission
+        double Mu = 1.0/14.0 ;//  taux guérissant
+        long[] NbMalades = new long[jours+1]; // tabeau pour stocker le nombre d'infectés
+        System.out.println("simulation de  Scenario1");
 
-        //patient0 est le premier patient infecté on va le generer aléatoirement
 
+        // initialisation de Tout les node a non malade
+        for(Node node : g ) node.setAttribute("health","healthy");
 
-        Node  patient0 = Toolkit.randomNode(graphe);
+        //Choisir un individu au hasard pour l'infecter
+        Node patient0 = Toolkit.randomNode(g);
+        patient0.setAttribute("health","infected");
+        Set<Node> malades = new HashSet<>();// liste des infecté
 
-        patient0.setAttribute("health", "infected");
         malades.add(patient0);
 
-        //calculer le nombre de malades pendant 84 jours (une sorte de simulation)
-        for (int j = 1; j <= jours; j++) {
+        HashSet<Node> copieMalades = new HashSet<>(); //
 
-            for (Node n : malades) {
-                //comme un individu envoi 1 mail par semaine a ses collaborateur alors la probabilité
-                // est de 1/7 de les infecté (voisins de cet individu(noeud))
-              //  double p = Math.random(); // un nombre aléatoire
-                //if (p < Beta) { // si la probabilté est vérifié Beta = 1/7
-                if (random.nextInt(7) + 1 == 1){
-                    n.neighborNodes().forEach(v->{
-                        if (!copieMalades.contains(v)) {
-                            //le voisin devient infecté
-                            v.setAttribute("health", "infected");
-                            copieMalades.add(v);
-                        }});
+        for(int i=1;i<=jours;i++){
+            for(Node node:malades){//parcourir tous les individus infectes
+                if(!copieMalades.contains(node))
+                    copieMalades.add(node);
+
+                //la probabilité de recevoir le mail infecté est 1/7
+                double p = Math.random(); // un nombre aléatoire
+                if (p < Beta) { // si la probabilté est vérifié Beta = 1/7
+                    for(Edge e : node){
+                        //Parcours des voisins de node
+                        Node voisin = e.getOpposite(node);
+                        if(!copieMalades.contains(voisin)){
+                            voisin.setAttribute("health","infected");
+                            copieMalades.add(voisin);
+                        }
+                    }
                 }
-                //On ajoute le noeud infecté n à une liste  s'il n'y est pas déjà
-                if (!copieMalades.contains(n))
-                    copieMalades.add(n);
             }
-
-            malades.clear();// on vide la liste
-            for (Node n : copieMalades) {
+            //vider le tableau infected,prepare les individus infectés pour lendemain
+            malades.clear();
+            //mettre à jour
+            for(Node n:copieMalades){
                 double p = Math.random();
                 if (p < Mu) {
                     n.setAttribute("health", "healthy");
-                } else {
-                    malades.add(n);
                 }
+                else malades.add(n);
             }
-            //On stock le nombre d'individus infectés dans le tableau Nbinfectée
-            for (Node n : graphe) {
-                if (n.getAttribute("health") == "infected") {
-                    infecteJ[j] = infecteJ[j]+1;
-                }
-            }
-            copieMalades.clear();
+            NbMalades[i] = malades.size() ;
+
+            System.out.println("Jour"+i+" ====> "+NbMalades[i] );
+
         }
-        //affichage de nb infectée par jour
-        for (int i = 0; i <=jours; i++) {
-            System.out.println(i + "   " + infecteJ[i]++);
+       // System.out.println(copieMalades.toString());
+        copieMalades.clear();
+       // System.out.println(copieMalades.toString());
+
+         savetab(nom_fichiers,NbMalades);
+
+    }
+    public static void  SimulationScenario2(Graph g , String nom_fichiers){
+
+        double Beta = 1.0/7.0 ; // la probabilité de transmission
+        double Mu = 1.0/14.0 ;//  taux guérissant
+        long[] NbMalades = new long[jours+1]; // tabeau pour stocker le nombre d'infectés
+        System.out.println("simulation de  Scenario1");
+     //   50 % des individus mettre à jour en permanence leur anti-virus (immunisation aléatoire)
+        List<Node> immunisation = Toolkit.randomNodeSet(g, g.getNodeCount()/2);
+        for(Node noeud : immunisation) {
+            noeud.setAttribute("health", "immunise");
         }
 
-        try {
-            System.out.println("simulation Scenario1");
-            PrintWriter fichier = new PrintWriter(new FileWriter("Scenario1.data"));
-            for (int i = 0; i <= jours; i++) {
-                fichier.write(i + "   " + infecteJ[i]++);
-                fichier.println();
+        // initialisation de Tout les node a non malade
+        for(Node node : g ) node.setAttribute("health","healthy");
+
+        //Choisir un individu au hasard pour l'infecter
+        Node patient0 = Toolkit.randomNode(g);
+        patient0.setAttribute("health","infected");
+        Set<Node> malades = new HashSet<>();// liste des infecté
+
+        malades.add(patient0);
+
+        HashSet<Node> copieMalades = new HashSet<>(); //
+
+        for(int i=1;i<=jours;i++){
+            for(Node node:malades){//parcourir tous les individus infectes
+                if(!copieMalades.contains(node))
+                    copieMalades.add(node);
+
+                //la probabilité de recevoir le mail infecté est 1/7
+                double p = Math.random(); // un nombre aléatoire
+                if (p < Beta) { // si la probabilté est vérifié Beta = 1/7
+                    for(Edge e : node){
+                        //Parcours des voisins de node
+                        Node voisin = e.getOpposite(node);
+                        if(!copieMalades.contains(voisin)){
+                            voisin.setAttribute("health","infected");
+                            copieMalades.add(voisin);
+                        }
+                    }
+                }
             }
-            fichier.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+            //vider le tableau infected,prepare les individus infectés pour lendemain
+            malades.clear();
+            //mettre à jour
+            for(Node n:copieMalades){
+                double p = Math.random();
+                if (p < Mu) {
+                    n.setAttribute("health", "healthy");
+                }
+                else malades.add(n);
+            }
+            NbMalades[i] = malades.size() ;
+
+            System.out.println("Jour"+i+" ====> "+NbMalades[i] );
+
         }
+        // System.out.println(copieMalades.toString());
+        copieMalades.clear();
+        // System.out.println(copieMalades.toString());
+
+        savetab(nom_fichiers,NbMalades);
 
     }
 
@@ -137,6 +186,22 @@ public class Propagation {
 
 
 
+    public static  void  savetab( String name,  long [] tab){
+    try {
+        System.out.println("Fin  simulation de  "+name);
+        PrintWriter fichier = new PrintWriter(new FileWriter(name+".data"));
+        for (int i = 0; i < jours; i++) {
+            fichier.write(i + "   " + tab[i]++);
+            fichier.println();
+        }
+
+        fichier.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+
+}
 
 
 
@@ -145,7 +210,8 @@ public class Propagation {
 
 
  Graph g =readgraphe("./src/resources/com-dblp.ungraph.txt");
-
+Graph g2=g;
+Graph g3=g;
 
         double beta = (double) 1/7 ;
         double mu = (double) 1/14;
@@ -154,10 +220,15 @@ public class Propagation {
         System.out.println("Taux de propagation du virus  λ = β/µ= 14/7= " +lambda );
         System.out.println("Seuil épidémique λc = 〈k〉/〈k2> = " +averageDegree/disDegre(g));
         System.out.println("le seuil théorique d'un réseau aléatoire du même degré moyen : λc = 1/<K>+1 =" + 1/(1+averageDegree));
-        simulationScenario1(g);
+       //simulationScenario1(g);
+       SimulationScenario1(g,"test6");
 
-
-
+       // saveGnuPlot( g,  txt);
+         //gralPropagationAlgo(1,g,"test1");
+        // simulation1(g);
+       // gralPropagationAlgo(2,g2,"test2");
+        // simulation1(g);
+        ///gralPropagationAlgo(3,g3,"test3");
     }
 
 

@@ -184,7 +184,7 @@ Nos collaborateurs scientifiques communiquent souvent par mail. Malheureusement 
 - Un individu envoie en moyenne un mail par semaine à chacun de ses collaborateurs.
 - Un individu met à jour son anti-virus en moyenne deux fois par mois. Cela nettoie son système mais ne le protège pas de nouvelles infections car le virus mute.
 L'épidémie commence avec un individu infecté (patient zéro).
-## 1. premiere question :  
+## 1.  :  
 Quel est le taux de propagation du virus ? Quel est le seuil épidémique du réseau ? Comparez avec le seuil théorique d'un réseau aléatoire du même degré moyen.
 ### 1.1. Taux de propagation du virus :
 Pour prédire si la maladie persiste, on définit le taux de
@@ -194,12 +194,14 @@ propagation λ par  :
 ``` 
 - β est la probabilité de transmettre dans une unité de temps dans notre cas :
 ```math
-β = 1/7  avec t = 1 jour 
+β = 1/7   
 ```
+avec t = 1 jour 
 - μ est le taux de guérison dans notre cas:
 ```math                                       
-β = 1 / 14 avec t = 1 mois                  
+β = 1 / 14                   
 ```   
+avec t = 1 mois
 Donc :
 ```math                                       
 λ = β/µ = 14/7= 2                      
@@ -218,4 +220,10 @@ Donc :
 ### 1.4.Résultats obtenue: 
 ![](./Capture_propagation/Capture1_propagation.png)
 
+### 2. 
+Simulez la propagation du virus jour par jour pendant trois mois avec les scénarios suivants :
 
+On ne fait rien pour empêcher l'épidémie
+On réussit à convaincre 50 % des individus de mettre à jour en permanence leur anti-virus (immunisation aléatoire)
+On réussit à convaincre 50 % des individus de convaincre un de leurs contacts de mettre à jour en permanence son anti-virus (immunisation sélective).
+Pour chacun des trois scénarios, tracez l'évolution de la fraction d'infectés de la population non immunisée. Que peut-on conclure ?

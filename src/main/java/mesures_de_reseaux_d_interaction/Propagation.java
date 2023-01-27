@@ -195,6 +195,7 @@ public class Propagation {
         malades.clear();
         // System.out.println(copieMalades.toString());
         copieMalades.clear();
+        System.out.println("le seuil épidémique du réseau SC2:  " + Toolkit.averageDegree(g)/disDegre(g)+"\n");
         // System.out.println(copieMalades.toString());
         //mettre les donner de tableau dans un fichier avec la méthode savetab
         savetab(nom_fichiers,NbMalades);
@@ -227,6 +228,9 @@ public class Propagation {
         }
         System.out.println("Le degré moyen des groupes 0 est :"+TotalDegreGroupe0/moitieIndiv.size()+"\n");
         System.out.println("Le degré moyen des groupes 1 est :"+TotalDegreGroupe1/moitieIndiv.size()+"\n");
+
+        System.out.println("le seuil épidémique du réseau SC 3 : " + Toolkit.averageDegree(g)/disDegre(g)+"\n");
+
 
 
         Node patient0 ;
@@ -325,8 +329,8 @@ public class Propagation {
         System.out.println("Seuil épidémique λc = 〈k〉/〈k2> = " +averageDegree/disDegre(g));
         System.out.println("le seuil théorique d'un réseau aléatoire du même degré moyen : λc = 1/<K>+1 =" + 1/(1+averageDegree));
         //SimulationScenario1(g,"scenario1");
-       // SimulationScenario2(g,"scenario2");
-       SimulationScenario3(g,"Scenario3");
+        SimulationScenario2(g,"scenario2TD");
+       //SimulationScenario3(g,"Scenario3");
 
 
     }

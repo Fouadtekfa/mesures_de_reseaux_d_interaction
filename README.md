@@ -220,10 +220,32 @@ Donc :
 ### 1.4.Résultats obtenue: 
 ![](./Capture_propagation/Capture1_propagation.png)
 
-### 2. 
+### 2. Simulation de la propagation du virus selon le scénario:
 Simulez la propagation du virus jour par jour pendant trois mois avec les scénarios suivants :
 
 On ne fait rien pour empêcher l'épidémie
 On réussit à convaincre 50 % des individus de mettre à jour en permanence leur anti-virus (immunisation aléatoire)
 On réussit à convaincre 50 % des individus de convaincre un de leurs contacts de mettre à jour en permanence son anti-virus (immunisation sélective).
 Pour chacun des trois scénarios, tracez l'évolution de la fraction d'infectés de la population non immunisée. Que peut-on conclure ?
+### 2.1. Scénario 1 :
+Dans ce scénario, on choisit aléatoirement un individu pour être le patient zéro que serra infectée et on ne fait rien pour empêcher la transmutation du virus donc on va travailler qu'en fonction β( la probabilité de transmettre dans une unité de temps) et Mu (taux de guérison)
+Pour se là,j'ai créé la méthode SimulationScenario1 (Graph g , String nom_fichiers) qui prend un graphe (notre réseau) et nom de fichiers a généré en utilisant la méthode savtab ( String name, long [] tab) afin de sauvegarder le tableau dans un fichier 
+
+Voici la courbe de premier scénario 1 :
+
+![Scénario 1](./src/resources/propagation/Scenario1.png)
+
+### 2.1. Scénario 2 :
+Dans ce scénario, on réussit à convaincre 50 % des individus de mettre à jour en permanence leur anti-virus (immunisation aléatoire) puis on a aussi les deux paramètre à prendre en compte β( la probabilité de transmettre dans une unité de temps) et Mu (taux de guérison) es choisir un nœud au hasard pour l'infecter qui serra le patient zéro à condition qu'il n'est pas déjà  immunisé.Pour se là,j'ai créé la méthode SimulationScenario1 (Graph g , String nom_fichiers) qui prend un graphe (notre réseau) et nom de fichiers a généré en utilisant la méthode savtab ( String name, long [] tab) afin de sauvegarder le tableau dans un fichier.
+Pour se là,j'ai créé la méthode SimulationScenario2 (Graph g , String nom_fichiers) qui prend un graphe (notre réseau) et nom de fichiers a généré en utilisant la méthode savtab ( String name, long [] tab) afin de sauvegarder le tableau dans un fichier
+
+Voici la courbe de deuxième scénario:
+
+![Scénario 2 ](./src/resources/propagation/Scenario2.png)
+
+
+
+### 2.1. Scénario 3 :
+
+
+

@@ -8,11 +8,11 @@ import org.graphstream.graph.implementations.DefaultGraph;
 import org.graphstream.stream.file.FileSource;
 import org.graphstream.stream.file.FileSourceEdge;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import static org.graphstream.algorithm.Toolkit.randomNode;
 import static org.graphstream.algorithm.Toolkit.randomNodeSet;
@@ -134,7 +134,7 @@ public class Propagation {
             noeud.setAttribute("status", "protected");
         }
 
-        //Choisir un noeud au hasard pour l'infecter qui serra le patient zéro a condition que il es pas immunisé
+        //Choisir un noeud au hasard pour l'infecter qui serra le patient zéro a condition que il n'es pas immunisé
         Node patient0 ;
         do{
 
@@ -201,25 +201,30 @@ public class Propagation {
 
     }
 
+    public static void  SimulationScenario3(Graph graph ) {
+        System.out.println("simulation de  Scenario3");
 
-
-
+    }
 
 
     public static  void  savetab( String name,  long [] tab){
-    try {
-        System.out.println("Fin  simulation de  "+name);
-        PrintWriter fichier = new PrintWriter(new FileWriter(name+".data"));
-        for (int i = 0; i < jours; i++) {
-            fichier.write(i + "   " + tab[i]++);
-            fichier.println();
+
+        try {
+
+            String filepath = System.getProperty("user.dir") + File.separator + "./src/resources/propagation/"+name+".data";
+            FileWriter fw = new FileWriter(filepath);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (int i = 0; i < jours; i++) {
+                bw.write(i + "   " + tab[i]++ +" \n");
+
+            }
+
+            bw.close();
+            System.out.println("Fin  simulation de  "+name);
+            System.out.println("Le fichier "+name+" à été généré avec succès dans le répertoire des ressources/propagation");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        fichier.close();
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-
 
 }
 
@@ -239,9 +244,9 @@ public class Propagation {
         System.out.println("Taux de propagation du virus  λ = β/µ= 14/7= " +lambda );
         System.out.println("Seuil épidémique λc = 〈k〉/〈k2> = " +averageDegree/disDegre(g));
         System.out.println("le seuil théorique d'un réseau aléatoire du même degré moyen : λc = 1/<K>+1 =" + 1/(1+averageDegree));
-        SimulationScenario1(g,"testescenario1");
-        SimulationScenario2(g,"test");
-
+        //SimulationScenario1(g,"scenario1");
+       // SimulationScenario2(g,"scenario2");
+      // SimulationScenario3(g);
 
     }
 

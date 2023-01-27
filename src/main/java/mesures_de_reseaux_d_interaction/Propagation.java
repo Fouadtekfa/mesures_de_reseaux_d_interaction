@@ -1,10 +1,15 @@
 package mesures_de_reseaux_d_interaction;
 
 import org.graphstream.algorithm.Toolkit;
+import org.graphstream.algorithm.generator.BarabasiAlbertGenerator;
+import org.graphstream.algorithm.generator.Generator;
+import org.graphstream.algorithm.generator.RandomGenerator;
+import org.graphstream.graph.BreadthFirstIterator;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.DefaultGraph;
+import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.stream.file.FileSource;
 import org.graphstream.stream.file.FileSourceEdge;
 
@@ -154,7 +159,10 @@ public class Propagation {
         malades.add(patient0);
         //copie des malades
         HashSet<Node> copieMalades = new HashSet<>(); //
-
+        for(Node node:immunisation){
+            g.removeNode(node);
+        }
+        System.out.println("le seuil épidémique du réseau SC2:  " + Toolkit.averageDegree(g)/disDegre(g)+"\n");
 
         for(int i=1;i<=jours;i++){
 
@@ -195,12 +203,15 @@ public class Propagation {
         malades.clear();
         // System.out.println(copieMalades.toString());
         copieMalades.clear();
-        System.out.println("le seuil épidémique du réseau SC2:  " + Toolkit.averageDegree(g)/disDegre(g)+"\n");
         // System.out.println(copieMalades.toString());
         //mettre les donner de tableau dans un fichier avec la méthode savetab
         savetab(nom_fichiers,NbMalades);
 
     }
+
+
+
+
 
     public static void  SimulationScenario3(Graph g , String nom_fichiers){
         Random numRandom = new Random();
@@ -226,7 +237,7 @@ public class Propagation {
             TotalDegreGroupe1 += nodeImmunise.getDegree();
 
         }
-        System.out.println("Le degré moyen des groupes 0 est :"+TotalDegreGroupe0/moitieIndiv.size()+"\n");
+       System.out.println("Le degré moyen des groupes 0 est :"+TotalDegreGroupe0/moitieIndiv.size()+"\n");
         System.out.println("Le degré moyen des groupes 1 est :"+TotalDegreGroupe1/moitieIndiv.size()+"\n");
 
         System.out.println("le seuil épidémique du réseau SC 3 : " + Toolkit.averageDegree(g)/disDegre(g)+"\n");
@@ -311,6 +322,57 @@ public class Propagation {
 
 
 
+    /**
+     *
+     * @param nbNoeuds
+     * @param degreeMoyen
+     * @return graphe
+     */
+    public static Graph generateurBarabasiAlbert(int nbNoeuds ,int degreeMoyen) {
+        System.out.println("La génération du graphe Barabàsi-Albert ");
+        Graph graph = new SingleGraph("Barabàsi-Albert");
+        // Between 1 and  degreeMoyen new links per node added.
+        Generator gen = new BarabasiAlbertGenerator(degreeMoyen);
+        // Generate nbNoeuds nodes:
+        gen.addSink(graph);
+        gen.begin();
+
+        /*for (int i = 0; i < nbNoeuds; i++) {
+            gen.nextEvents();
+        }*/
+        while(graph.getNodeCount()<nbNoeuds) {
+            gen.nextEvents();
+        }
+        gen.end();
+        System.out.println("Fin génération du graphe Barabàsi-Albert");
+        return graph;
+    }
+
+    /**
+     *
+     * @param nbNoeuds
+     * @param degreeMoyen
+     * @return graphe
+     */
+    public static Graph generateurRandom(double nbNoeuds , double degreeMoyen){
+        System.out.println("La génération du graphe aléatoire ");
+        Graph graph = new SingleGraph("RandomGraph");
+        Generator gen = new RandomGenerator(degreeMoyen);
+        gen.addSink(graph);
+        gen.begin();
+       /* for (int i = 0; i < nbNoeuds; i++)
+            gen.nextEvents();
+
+        */
+        while(graph.getNodeCount()<nbNoeuds) {
+            gen.nextEvents();
+        }
+        gen.end();
+        System.out.println("Fin génération du graphe aléatoire");
+        return graph;
+    }
+
+
 
 
 
@@ -320,7 +382,7 @@ public class Propagation {
 
  Graph g =readgraphe("./src/resources/com-dblp.ungraph.txt");
 
-
+/*
         double beta = (double) 1/7 ;
         double mu = (double) 1/14;
         double lambda = (double) beta/mu;
@@ -329,8 +391,20 @@ public class Propagation {
         System.out.println("Seuil épidémique λc = 〈k〉/〈k2> = " +averageDegree/disDegre(g));
         System.out.println("le seuil théorique d'un réseau aléatoire du même degré moyen : λc = 1/<K>+1 =" + 1/(1+averageDegree));
         //SimulationScenario1(g,"scenario1");
-        SimulationScenario2(g,"scenario2TD");
+       // SimulationScenario2(g,"scenario2TD");
        //SimulationScenario3(g,"Scenario3");
+
+  */
+       // Graph gRandom= generateurRandom(g.getNodeCount(),6);
+
+        //SimulationScenario1(gRandom,"Randomscenario1");
+        //SimulationScenario2(gRandom,"Randomscenario2");
+        //SimulationScenario3(gRandom,"RandomScenario3");
+        Graph gBA= generateurBarabasiAlbert (g.getNodeCount(),6);
+         //SimulationScenario1(gBA,"BarabasiAlbertscenario1");
+        //SimulationScenario2(gBA,"BarabasiAlbertscenario2");
+        //SimulationScenario3(gBA,"BarabasiAlbertScenario3");
+
 
 
     }

@@ -236,7 +236,7 @@ Voici la courbe de premier scénario 1 :
 ![Scénario 1](./src/resources/propagation/Scenario1.png)
 
 ### 2.1. Scénario 2 :
-Dans ce scénario, on réussit à convaincre 50 % des individus de mettre à jour en permanence leur anti-virus (immunisation aléatoire) puis on a aussi les deux paramètre à prendre en compte β( la probabilité de transmettre dans une unité de temps) et Mu (taux de guérison) es choisir un nœud au hasard pour l'infecter qui serra le patient zéro à condition qu'il n'est pas déjà  immunisé.Pour se là,j'ai créé la méthode SimulationScenario1 (Graph g , String nom_fichiers) qui prend un graphe (notre réseau) et nom de fichiers a généré en utilisant la méthode savtab ( String name, long [] tab) afin de sauvegarder le tableau dans un fichier.
+Dans ce scénario, on réussit à convaincre 50 % des individus de mettre à jour en permanence leur anti-virus (immunisation aléatoire) puis on a aussi les deux paramètre à prendre en compte β( la probabilité de transmettre dans une unité de temps) et Mu (taux de guérison) es choisir un nœud au hasard pour l'infecter qui serra le patient zéro à condition qu'il n'est pas déjà immunisé.
 Pour se là,j'ai créé la méthode SimulationScenario2 (Graph g , String nom_fichiers) qui prend un graphe (notre réseau) et nom de fichiers a généré en utilisant la méthode savtab ( String name, long [] tab) afin de sauvegarder le tableau dans un fichier
 
 Voici la courbe de deuxième scénario:
@@ -246,6 +246,23 @@ Voici la courbe de deuxième scénario:
 
 
 ### 2.1. Scénario 3 :
+On réussit à convaincre 50 % des individus de convaincre un de leurs contacts de mettre à jour en permanence son anti-virus (immunisation sélective).puis on a aussi les deux paramètre à prendre en compte β( la probabilité de transmettre dans une unité de temps) et Mu (taux de guérison) es choisir un nœud au hasard pour l'infecter qui serra le patient zéro à condition qu'il n'est pas déjà immunisé.
+Pour se là,j'ai créé la méthode SimulationScenario2 (Graph g , String nom_fichiers) qui prend un graphe (notre réseau) et nom de fichiers a généré en utilisant la méthode savtab ( String name, long [] tab) afin de sauvegarder le tableau dans un fichier
+
+![Scénario 3](./src/resources/propagation/Scenario3.png)
+
+
+## 3. calculer de degré moyen des groupes 0 et 1: 
+
+![Scénario 3](./Capture_propagation/Capture2.png)
+
+
+
+
+
+
+
+le seuil épidémique du réseau SC2:  0.08871758017757526
 
 
 

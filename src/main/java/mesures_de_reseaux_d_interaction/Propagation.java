@@ -201,8 +201,77 @@ public class Propagation {
 
     }
 
-    public static void  SimulationScenario3(Graph graph ) {
+    public static void  SimulationScenario3(Graph g , String nom_fichiers){
+        Random numRandom = new Random();
+
+        double Beta = 1.0/7.0 ; // β est la probabilité de transmettre dans une une journée
+        double Mu = 1.0/14.0 ;//  μ est  le taux de guérison
+
+        long[] NbMalades = new long[90+1]; // tableau pour stocker le nombre d'infectés i la journer t[i] le nombre d'infectés
+
         System.out.println("simulation de  Scenario3");
+        for(Node node : g ) node.setAttribute("status","healthy");
+
+
+        List<Node> moitieIndiv = Toolkit.randomNodeSet(g,g.getNodeCount()/2);//  50 % des individus (pour cas 3)
+        List<Node> immunisation =   new ArrayList();//Toolkit.randomNodeSet(g, g.getNodeCount()/2);
+
+        for(Node node : moitieIndiv) {
+            Node nodeImmunise = node.getEdge(numRandom.nextInt(node.getDegree())).getOpposite(node);
+            nodeImmunise.setAttribute("statut","protected");
+            immunisation.add(nodeImmunise);
+        }
+
+
+        Node patient0 ;
+        do{
+            patient0 = Toolkit.randomNode(g);
+
+        } while((patient0.getAttribute("status") == "protected"));
+
+        patient0.setAttribute("status","infected");
+        Set<Node> malades = new HashSet<>();
+        malades.add(patient0);
+        HashSet<Node> copieMalades = new HashSet<>(); //
+
+        for(int i=1;i<=90;i++) {
+
+            for(Node n:malades) {
+
+                double p1 = Math.random();
+                if(p1 <  Beta ) {
+                    n.neighborNodes().forEach(voisin->{
+                        if(!copieMalades.contains(voisin) && !moitieIndiv.contains(voisin)) {
+                            voisin.setAttribute("status", "infected");
+                            copieMalades.add(voisin);
+                        }
+
+                    });
+                    if(!copieMalades.contains(n))
+                        copieMalades.add(n);
+                }
+            }
+
+            malades.clear();
+            for(Node n_:copieMalades){
+                double p2 = Math.random();
+                if (p2 < Mu) {
+                    n_.setAttribute("status", "healthy");
+                }
+                else {
+                    malades.add(n_);
+                    n_.setAttribute("status","infected");
+
+                }
+
+            }
+
+            NbMalades[i] = malades.size() ;
+        }
+        malades.clear();
+        copieMalades.clear();
+        savetab(nom_fichiers, NbMalades);
+
 
     }
 
@@ -231,6 +300,9 @@ public class Propagation {
 
 
 
+
+
+
     public static void main( String[] args ){
 
 
@@ -246,7 +318,8 @@ public class Propagation {
         System.out.println("le seuil théorique d'un réseau aléatoire du même degré moyen : λc = 1/<K>+1 =" + 1/(1+averageDegree));
         //SimulationScenario1(g,"scenario1");
        // SimulationScenario2(g,"scenario2");
-      // SimulationScenario3(g);
+       SimulationScenario3(g,"testScenario3");
+
 
     }
 

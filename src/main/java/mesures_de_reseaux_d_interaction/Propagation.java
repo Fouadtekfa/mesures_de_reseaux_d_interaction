@@ -212,7 +212,8 @@ public class Propagation {
         System.out.println("simulation de  Scenario3");
         for(Node node : g ) node.setAttribute("status","healthy");
 
-
+        double TotalDegreGroupe0 = 0;
+        double TotalDegreGroupe1 = 0;
         List<Node> moitieIndiv = Toolkit.randomNodeSet(g,g.getNodeCount()/2);//  50 % des individus (pour cas 3)
         List<Node> immunisation =   new ArrayList();//Toolkit.randomNodeSet(g, g.getNodeCount()/2);
 
@@ -220,7 +221,12 @@ public class Propagation {
             Node nodeImmunise = node.getEdge(numRandom.nextInt(node.getDegree())).getOpposite(node);
             nodeImmunise.setAttribute("statut","protected");
             immunisation.add(nodeImmunise);
+            TotalDegreGroupe0 += node.getDegree();
+            TotalDegreGroupe1 += nodeImmunise.getDegree();
+
         }
+        System.out.println("Le degré moyen des groupes 0 est :"+TotalDegreGroupe0/moitieIndiv.size()+"\n");
+        System.out.println("Le degré moyen des groupes 1 est :"+TotalDegreGroupe1/moitieIndiv.size()+"\n");
 
 
         Node patient0 ;
@@ -252,7 +258,7 @@ public class Propagation {
                 }
             }
 
-            malades.clear();
+
             for(Node n_:copieMalades){
                 double p2 = Math.random();
                 if (p2 < Mu) {
@@ -267,6 +273,8 @@ public class Propagation {
             }
 
             NbMalades[i] = malades.size() ;
+            System.out.println( i +" " + NbMalades[i]);
+            malades.clear();
         }
         malades.clear();
         copieMalades.clear();
@@ -318,7 +326,7 @@ public class Propagation {
         System.out.println("le seuil théorique d'un réseau aléatoire du même degré moyen : λc = 1/<K>+1 =" + 1/(1+averageDegree));
         //SimulationScenario1(g,"scenario1");
        // SimulationScenario2(g,"scenario2");
-       SimulationScenario3(g,"testScenario3");
+       SimulationScenario3(g,"Scenario3");
 
 
     }

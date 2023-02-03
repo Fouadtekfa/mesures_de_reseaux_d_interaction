@@ -247,7 +247,7 @@ Voici la courbe de deuxième scénario:
 
 ### 2.1. Scénario 3 :
 On réussit à convaincre 50 % des individus de convaincre un de leurs contacts de mettre à jour en permanence son anti-virus (immunisation sélective).puis on a aussi les deux paramètre à prendre en compte β( la probabilité de transmettre dans une unité de temps) et Mu (taux de guérison) es choisir un nœud au hasard pour l'infecter qui serra le patient zéro à condition qu'il n'est pas déjà immunisé.
-Pour se là,j'ai créé la méthode SimulationScenario2 (Graph g , String nom_fichiers) qui prend un graphe (notre réseau) et nom de fichiers a généré en utilisant la méthode savtab ( String name, long [] tab) afin de sauvegarder le tableau dans un fichier
+Pour se là,j'ai créé la méthode SimulationScenario3 (Graph g , String nom_fichiers) qui prend un graphe (notre réseau) et nom de fichiers a généré en utilisant la méthode savtab ( String name, long [] tab) afin de sauvegarder le tableau dans un fichier
 
 ![Scénario 3](./src/resources/propagation/Scenario3.png)
 
@@ -256,13 +256,38 @@ Pour se là,j'ai créé la méthode SimulationScenario2 (Graph g , String nom_fi
 
 ![Scénario 3](./Capture_propagation/Capture2.png)
 
+D'après les résultats, on remarque que le degré moyen du groupe0≈ 6.613611706824776 qui 
+est similaire au degré moyen de notre réseau, contrairement au degré moyen du groupe1≈11.360944594036832 qui est presque le double.
+
+Donc on peut dire qu'il y a une présence plus élevée des hubs dans le groupe 1, ce qui s'explique par rapport à la sélection 
+des noeuds dans ce groupe, qui ait pour but d'avoir plus de chance de tomber sur un "hub", étant donné que nous sélectionnons 
+un noeud aléatoirement puis son voisin aléatoirement ce qu'augumante notre chance de tomber sûr un hub.
+
+
+
+## 4. seuil épidémique de Scénario 2 et 3:
+
+Pour calculer le seuil épidémique de Scénario 2 et 3, j'ai commencé par créer une liste et puis ajouter les 
+noeuds du graphe, je parcours ensuite la liste et si je trouve un noeud immunisé, 
+je l'enlève de la liste. Finalement, je calcule le seuil en utilisant la formule <k>/<k²> des noeuds restants dans la liste (les noeuds non immunisée).
+
+Voici les résultats obtenus:  
+
+![seuil épidémique](./Capture_propagation/Capture3.png)
 
 
 
 
+## 5. Simulation de l'épidémie dans un réseau aléatoire et un réseau généré avec la méthode d'attachement préférentiel:
 
+### 5.1. Simulation de l'épidémie dans un réseau aléatoire:
 
-le seuil épidémique du réseau SC2:  0.08871758017757526
+![Simulation alèatoire](./src/resources/propagation/random.png)
 
+### 5.2. Simulation dans un réseau généré avec la méthode d'attachement préférentiel:
 
+![Simulation BA](./src/resources/propagation/BarabasiAlbert.png)
 
+### 5.3. Comparaison et analyse des résultats : 
+
+![seuil épidémique](./Capture_propagation/Capture3.png)

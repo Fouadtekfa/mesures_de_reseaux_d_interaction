@@ -6,7 +6,8 @@ set title "Random"
 set yrange [0 : 300000]
 set xlabel "Jour" 
 set ylabel "Nombre d'infectée par jour"
-plot "Randomscenario2.data" t "Scenario1", \
-     "Randomscenario1.data" title "Scenario2"
+plot "Randomscenario1.data" t "Scenario1", \
+     "Randomscenario2.data" t "Scenario2", \
+     "RandomScenario3.data" t "Scenario3" 
 
 

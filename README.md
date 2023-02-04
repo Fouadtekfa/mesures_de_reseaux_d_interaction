@@ -4,6 +4,8 @@
 - 2022-2023
 
 
+Je vous présente mes excuses pour le retard de rendu de TP2 , vu que j'ai était malade . Vous pouvez trouver mon certificat d'arrêt maladie dans mon dépôt Git.
+
 Dans ce TP il nous est demandé analyser un réseau de collaboration scientifique en informatique. Le réseau est extrait de DBLP et disponible sur SNAP.
 # 1. Téléchargement et lecture de données avec GraphStream:
 Pour commencer j'ai tout d'abord téléchargé le fichier contenant la structure de notre réseau de DBLP qui es disponible sur [SNAP](https://snap.stanford.edu/data/com-DBLP.html),
@@ -133,7 +135,7 @@ pour tracer la distribution des distances avec le [fichier](/src/resources/Distr
 ![ distribution des distances ](src/resources/distributionDistance.png)
   
 ## 5.6. Hypothèse sur la loi de cette distribution :
-- D'après le graphe, on peut déduire que la loi de distribution de distance suit une loi binomiale.
+- La distribution de distances de ce réseaux suit un loi de Poisson.
 
 # Sixième question :
 Utilisez les générateurs de GraphStream pour générer un réseau aléatoire et un réseau avec la méthode d'attachement préférentiel
@@ -169,13 +171,13 @@ On utilise ce [script](src/resources/dd_dblp_B_A.gnuplot) pour tracer la distrib
 ![ distribution des distances Barabàsi-Albert  ](src/resources/distributionDistanceBarabasiAlbert.png) 
 
 ## 6.4. Les résultats expérimentaux et théoriques: 
-   - Les résultats sont preceque similaires entre les meseures théorique et pratique.  
+Les résultats sont preceque similaires entre les meseures théorique et pratique.
 
-## 6.5. Comparaison : 
+Sauf que remarque que le cooefficient de clustering du réseau arabàsi-Albert est plus élévé par rapport au
+collaborateur et au réseau aléatoire. 
 
-
-
-
+La distribution de distances des trois réseaux suit un loi de Poisson .
+et L'hypothèse des six degrés de séparation se confirme sûr les trois réseau.
 
 # TP 3 Propagation
 
@@ -252,6 +254,9 @@ Pour se là,j'ai créé la méthode SimulationScenario3 (Graph g , String nom_fi
 ![Scénario 3](./src/resources/propagation/Scenario3.png)
 
 
+<strong> D'après les trois courbes différentes de chaque Scenario,on ne peut conclure que l'immunisation 
+sélective et efficace par rapport à l'immunisation alèatoire </strong>
+
 ## 3. calculer de degré moyen des groupes 0 et 1: 
 
 ![Scénario 3](./Capture_propagation/Capture2.png)
@@ -269,13 +274,15 @@ un noeud aléatoirement puis son voisin aléatoirement ce qu'augumante notre cha
 
 Pour calculer le seuil épidémique de Scénario 2 et 3, j'ai commencé par créer une liste et puis ajouter les 
 noeuds du graphe, je parcours ensuite la liste et si je trouve un noeud immunisé, 
-je l'enlève de la liste. Finalement, je calcule le seuil en utilisant la formule <k>/<k²> des noeuds restants dans la liste (les noeuds non immunisée).
+je l'enlève de la liste. Finalement, je calcule le seuil en utilisant la formule <k> / <k²> des noeuds restants dans la liste (les noeuds non immunisée).
 
 Voici les résultats obtenus:  
 
 ![seuil épidémique](./Capture_propagation/Capture3.png)
 
-
+Le seuil épidémique de l'immunisation aléatoire est approximativement égal au seuil épidémique du réseau initial
+et le seuil épidémique de la stratégie d'immunisation sélective est plus élevé environ deux fois plus grand
+vu que dans le Scénario 3 (immunisation sélective) on retire un grand nombre de hubs du notre réseau ,ce qui limite la propagation du virus.
 
 
 ## 5. Simulation de l'épidémie dans un réseau aléatoire et un réseau généré avec la méthode d'attachement préférentiel:
@@ -286,8 +293,30 @@ Voici les résultats obtenus:
 
 ### 5.2. Simulation dans un réseau généré avec la méthode d'attachement préférentiel:
 
-![Simulation BA](./src/resources/propagation/BarabasiAlbert.png)
+![Simulation BarabasiAlbert](./src/resources/propagation/BarabasiAlbert.png)
 
 ### 5.3. Comparaison et analyse des résultats : 
+Scénario 1
+Les trois réseaux(initiale, randome et Barabasi-Albert) finissent presque à la même valeur mais cette valeur est atteinte plus
+rapidement dans le graphe généré avec la méthode d'attachement préférentiel (Barabasi-Albert).
 
-![seuil épidémique](./Capture_propagation/Capture3.png)
+Scénario 2
+
+Les réseaux random et Barabasi-Albert se stabilisent à des valeurs similaires, tandis que 
+le réseau initial se stabilise à une valeur légèrement inférieure sauf que ses valeurs s'atteinte plus
+rapidement dans le graphe généré avec la méthode d'attachement préférentiel (Barabasi-Albert).
+
+Scénario 3 
+
+Même avec une stratégie d'immunisation sélective, les réseaux aléatoire et Barabasi-Albert se stabilisent à des valeurs similaires 
+au Scénario2 sauf que ses valeurs s'atteinte plus rapidement dans le Scénario2, contrairement au réseau initiale.
+
+Ses valeurs s'atteinte plus rapidement dans le graphe généré avec la méthode d'attachement préférentiel. 
+
+## conclusion
+
+On peut en conclure que la stratégie d'immunisation sélective reste avantageuse dans tous les cas.
+
+
+
+

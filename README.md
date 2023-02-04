@@ -4,7 +4,7 @@
 - 2022-2023
 
 
-Je vous présente mes excuses pour le retard de rendu de TP2 , vu que j'ai était malade . Vous pouvez trouver mon certificat d'arrêt maladie dans mon dépôt Git.
+**Je vous présente mes excuses pour le retard de rendu de TP3 , vu que j'ai était malade .Vous trouverez ci-joint certificat d'arrêt maladie dans mon dépôt Git.**
 
 Dans ce TP il nous est demandé analyser un réseau de collaboration scientifique en informatique. Le réseau est extrait de DBLP et disponible sur SNAP.
 # 1. Téléchargement et lecture de données avec GraphStream:

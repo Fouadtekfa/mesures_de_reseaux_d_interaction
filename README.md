@@ -4,7 +4,7 @@
 - 2022-2023
 
 
-**Je vous présente mes excuses pour le retard de rendu de TP3 , vu que j'ai était malade .Vous trouverez ci-joint certificat d'arrêt maladie dans mon dépôt Git.**
+**Pour exécuter ce TP, vous devez effectuer la commande "mvn install" dans votre terminal. Cette commande permettra de construire et d'installer toutes les dépendances nécessaires au bon fonctionnement du projet.**
 
 Dans ce TP il nous est demandé analyser un réseau de collaboration scientifique en informatique. Le réseau est extrait de DBLP et disponible sur SNAP.
 # 1. Téléchargement et lecture de données avec GraphStream:
